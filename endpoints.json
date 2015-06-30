@@ -16,8 +16,6 @@
 	},{
 		"url": "plan",
 		"data": {
-			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
-			"app_id": "b53a5765",
 			"fromPlace": "41.365472206597516,2.1183013916015625",
 			"toPlace": "41.365472206597516,2.1183013916015625",
 			"date": "05-26-2014",
@@ -108,7 +106,6 @@
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765",
 			"agency": "TMB",
-			"agency": "TMB",
 			"id": "2.2775",
 			"startTime": "1401066000",
 			"endTime": "1401152400"
@@ -116,7 +113,6 @@
 	},{
 		"url": "transit/stopData",
 		"data": {
-			"agency": "TMB",
 			"agency": "TMB",
 			"id": "2.2775",
 			"startTime": "1401066000",
