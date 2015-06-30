@@ -24,8 +24,8 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Endpoints <b class="caret"></b></a>
-						<ul id="endpoint-menu" class="dropdown-menu dropdown-menu-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+						<ul id="resources-menu" class="dropdown-menu dropdown-menu-right">
 						</ul>
 					</li>
 				</ul>
@@ -49,15 +49,15 @@
 				<dl class="dl-horizontal">
 					<dt>Base URL</dt>
 					<dd><a href="http://demo.geomati.co:8088/otp/routers/bcn/" target="_blank">http://demo.geomati.co:8088/otp/routers/bcn/</a></dd>
-					<dt>API docs (0.15)</dt>
-					<dd><a href="http://dev.opentripplanner.org/apidoc/0.15.0/" target="_blank">http://dev.opentripplanner.org/apidoc/0.15.0/</a></dd>
-					<dt>API docs (0.18 <a href="http://demo.geomati.co:8088/otp/application.wadl" target="_blank">wadl</a>)</dt>
+					<dt>0.18 API (from <a href="http://demo.geomati.co:8088/otp/application.wadl" target="_blank">wadl</a>)</dt>
 					<dd><a href="application.wadl.xml" target="_blank">application.wadl.xml (rendered as HTML)</a></dd>
+					<dt>0.15 docs</dt>
+					<dd><a href="http://dev.opentripplanner.org/apidoc/0.15.0/" target="_blank">http://dev.opentripplanner.org/apidoc/0.15.0/</a></dd>
 				</dl>
 			</div>
 		</div>
 	</div>
-	<div id="endpoints" class="container-fluid">
+	<div id="resources" class="container-fluid">
 	</div>
 	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -72,22 +72,22 @@
 		}]
 
 		$.ajax({
-			url: "endpoints.json"
+			url: "resources.json"
 		}).then(
-		parseEndpoints
+		parseResources
 		);
 
-		function parseEndpoints(endpoints) {
+		function parseResources(resources) {
 			var menu = "";
-			for(var e=0; e<endpoints.length; e++) {
-				var endpoint = endpoints[e];
-				var html = '<h2 id="header'+e+'">'+endpoint.name+'</h2> \
-				<div class="row" id="endpoint-'+e+'"> \
+			for(var e=0; e<resources.length; e++) {
+				var resource = resources[e];
+				var html = '<h2 id="header'+e+'">'+resource.name+'</h2> \
+				<div class="row" id="resource-'+e+'"> \
 				</div>';
-				$('#endpoints').append(html);
-				$('#endpoint-menu').append('<li><a href="#header'+e+'">'+endpoint.name+'</a></li>');
-				for(var r=0; r<endpoint.requests.length; r++) {
-					var request = endpoint.requests[r];
+				$('#resources').append(html);
+				$('#resources-menu').append('<li><a href="#header'+e+'">'+resource.name+'</a></li>');
+				for(var r=0; r<resource.requests.length; r++) {
+					var request = resource.requests[r];
 					request.url =  services[r].baseUrl + request.url;
 					var html = '<div class="col-sm-6"> \
 					<h3>'+services[r].version+'</h3> \
@@ -96,7 +96,7 @@
 					<h4>Response</h4> \
 					<pre id="response-'+e+'-'+r+'"></pre> \
 				</div>';
-				$('#endpoint-'+e).append(html);
+				$('#resource-'+e).append(html);
 				hljs.highlightBlock(document.getElementById('request-'+e+'-'+r));
 				request.context = { e: e, r: r };
 				$.ajax(request).then(function(response) {
