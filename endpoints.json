@@ -1,0 +1,126 @@
+[{
+	"name": "Càlcul de rutes",
+	"requests": [{
+		"url": "plan",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"fromPlace": "41.365472206597516,2.1183013916015625",
+			"toPlace": "41.365472206597516,2.1183013916015625",
+			"date": "05-26-2014",
+			"time": "11:58am",
+			"arriveBy": false,
+			"mode": "TRANSIT,WALK",
+			"showIntermediateStops": false
+		} 
+	},{
+		"url": "plan",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"fromPlace": "41.365472206597516,2.1183013916015625",
+			"toPlace": "41.365472206597516,2.1183013916015625",
+			"date": "05-26-2014",
+			"time": "11:58am",
+			"arriveBy": false,
+			"mode": "TRANSIT,WALK",
+			"showIntermediateStops": false
+		} 
+	}]
+},{
+	"name": "Modes de transport",
+	"requests": [{
+		"url": "transit/modes",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
+		} 
+	},{
+		"url": "transit/modes",
+		"data": {
+		} 
+	}]
+},{
+	"name": "Llistat d'operadors",
+	"requests": [{
+		"url": "transit/agencyIds",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
+		} 
+	},{
+		"url": "transit/agencyIds",
+		"data": {
+		} 
+	}]
+},{
+	"name": "Llistat de línies",
+	"requests": [{
+		"url": "transit/routes",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"agency": "TMB"
+		} 
+	},{
+		"url": "transit/routes",
+		"data": {
+			"agency": "TMB"
+		} 
+	}]
+},{
+	"name": "Detall d'una línia",
+	"requests": [{
+		"url": "transit/routeData",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"id": "2.23"
+		} 
+	},{
+		"url": "transit/routeData",
+		"data": {
+			"id": "2.23"
+		} 
+	}]
+},{
+	"name": "Detall d'una parada",
+	"requests": [{
+		"url": "transit/stopData",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"agency": "TMB",
+			"id": "2.2775"
+		} 
+	},{
+		"url": "transit/stopData",
+		"data": {
+			"agency": "TMB",
+			"id": "2.2775"
+		} 
+	}]
+},{
+	"name": "Propers serveis que passaran per una parada",
+	"requests": [{
+		"url": "transit/stopData",
+		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
+			"agency": "TMB",
+			"agency": "TMB",
+			"id": "2.2775",
+			"startTime": "1401066000",
+			"endTime": "1401152400"
+		} 
+	},{
+		"url": "transit/stopData",
+		"data": {
+			"agency": "TMB",
+			"agency": "TMB",
+			"id": "2.2775",
+			"startTime": "1401066000",
+			"endTime": "1401152400"
+		} 
+	}]
+}]

@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<title>OpenTripPlanner API Compare</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css" rel="stylesheet">
+	</head>
+	<body>
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container">
+	            <div class="navbar-header">
+	                <a class="navbar-brand" href="#">OpenTripPlanner API Compare</a>
+	            </div>
+	        </div>
+	    </div>
+        <div id="endpoints" class="container">
+	        <!--h2>Endpoint A</h2>
+	        <div class="row">
+	        	<div class="col-sm-6">
+	        		<h3>Version 1</h3>
+	        		<h4>Request</h4>
+	        		<pre>This is a request</pre>
+	        		<h4>Response</h4>
+	        		<pre>This is a response</pre>
+	        	</div>
+	        	<div class="col-sm-6">
+	        		<h3>Version 2</h3>
+		    		<h4>Request</h4>
+		    		<pre>This is a request</pre>
+		    		<h4>Response</h4>
+		    		<pre>This is a response</pre>
+		    	</div>
+	    	</div-->
+    	</div>
+	    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script>
+			var services = [{
+				version: "OTP v.0.11 (TMB API)",
+				baseUrl: "http://api.tmb.cat/v1/planner/"
+			},{
+				version: "OTP v.0.18",
+				baseUrl: "http://demo.geomati.co:8088/otp/routers/default/"
+			}]
+
+		    $.ajax({
+                url: "endpoints.json"
+            }).then(
+	            parseEndpoints
+	        );
+
+            function parseEndpoints(endpoints) {
+            	for(var e=0; e<endpoints.length; e++) {
+            		var endpoint = endpoints[e];
+            		var html = '<h2>'+endpoint.name+'</h2> \
+				        <div class="row" id="endpoint-'+e+'"> \
+				    	</div>';
+				    $('#endpoints').append(html);
+				    for(var r=0; r<endpoint.requests.length; r++) {
+            			var request = endpoint.requests[r];
+			        	var html = '<div class="col-sm-6"> \
+			        		<h3>'+services[r].version+'</h3> \
+			        		<h4>Request</h4> \
+			        		<pre>'+ JSON.stringify(request, null, 3) +'</pre> \
+			        		<h4>Response</h4> \
+			        		<pre id="response-'+e+'-'+r+'"></pre> \
+			        	</div>';
+			        	$('#endpoint-'+e).append(html);
+            			$.ajax({
+            				url: services[r].baseUrl + request.url,
+            				data: request.data,
+            				context: {
+            					e: e,
+            					r: r
+            				}
+            			}).then(function(response) {
+            				var el = $('#response-'+this.e+'-'+this.r);
+            				el.css("color", "green");
+            				el.append(JSON.stringify(response, null, 3));
+            			}, function(error) {
+            				var el = $('#response-'+this.e+'-'+this.r);
+            				el.css("color", "red");
+            				el.append(JSON.stringify(error, null, 3));
+            			});
+            		}     		
+            	}
+            }
+		</script>
+    </body>
+</html>
