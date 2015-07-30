@@ -16,6 +16,8 @@
 	},{
 		"url": "plan",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765",
 			"fromPlace": "41.365472206597516,2.1183013916015625",
 			"toPlace": "41.365472206597516,2.1183013916015625",
 			"date": "05-26-2014",
@@ -36,6 +38,8 @@
 	},{
 		"url": "metadata",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 },{
@@ -49,6 +53,8 @@
 	},{
 		"url": "index/agencies",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 },{
@@ -63,6 +69,8 @@
 	},{
 		"url": "index/agencies/TMB/routes",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 },{
@@ -77,6 +85,8 @@
 	},{
 		"url": "index/routes/TMB:2.23",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 },{
@@ -92,6 +102,8 @@
 	},{
 		"url": "index/stops/TMB:2.2775",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 },{
@@ -109,6 +121,8 @@
 	},{
 		"url": "index/stops/TMB:2.2775/stoptimes/20140526",
 		"data": {
+			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
+			"app_id": "b53a5765"
 		} 
 	}]
 }]
