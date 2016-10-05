@@ -36,25 +36,23 @@
 		<h2>Adreces i documentació de les APIs</h2>
 		<div class="row">
 			<div class="col-sm-6">
-				<h3>TMB API v1 (OTP v.0.11)</h3>
+				<h3>TMB API v1 (OTP v.0.19)</h3>
 				<dl class="dl-horizontal">
 					<dt>Base URL</dt>
 					<dd><a href="http://api.tmb.cat/v1/planner/?app_key=cb2fc6155198c620d9d6f454d4a6ef69&amp;app_id=b53a5765" target="_blank">http://api.tmb.cat/v1/planner/</a></dd>
-					<dt>API docs</dt>
-					<dd><a href="https://developer.tmb.cat/api/v1/docs/planner" target="_blank">https://developer.tmb.cat/api/v1/docs/planner</a></dd>
+					<dt>0.18 (!) Plan Params</dt>
+					<dd><a href="OTP-0.18-PlannerQueryParams.html" target="_blank">Manually Extracted</a></dd>
 				</dl>
 			</div>
 			<div class="col-sm-6">
-				<h3>TMB API v2 (OTP v.0.18)</h3>
+				<h3>TMB API v2 (OTP v.1.0.0)</h3>
 				<dl class="dl-horizontal">
 					<dt>Base URL</dt>
 					<dd><a href="http://api.tmb.cat/v2/planner/?app_key=cb2fc6155198c620d9d6f454d4a6ef69&amp;app_id=b53a5765" target="_blank">http://api.tmb.cat/v2/planner/</a></dd>
-					<dt>0.15 API docs</dt>
-					<dd><a href="http://dev.opentripplanner.org/apidoc/0.15.0/" target="_blank">http://dev.pentripplanner.org/apidoc/0.15.0/</a></dd>
-					<dt>0.18 API (from <a href="http://demo.geomati.co:8088/otp/application.wadl" target="_blank">wadl</a>)</dt>
-					<dd><a href="application.wadl.xml" target="_blank">application.wadl.xml (rendered as HTML)</a></dd>
-					<dt>Plan input parameters</dt>
-					<dd><a href="https://github.com/geomatico/otp-api-diff/blob/gh-pages/OTP-0.18-PlannerQueryParams.md" target="_blank">https://github.com/geomatico/otp-api-diff/blob/gh-pages/OTP-0.18-PlannerQueryParams.md</a></dd>
+					<dt>1.0.0 Plan Params</dt>
+					<dd><a href="http://dev.opentripplanner.org/apidoc/1.0.0/resource_PlannerResource.html" target="_blank">Official API Docs</a></dd>
+					<dt>Full 1.0.0 API Docs</dt>
+					<dd><a href="http://dev.opentripplanner.org/apidoc/1.0.0/" target="_blank">Official API Docs</a></dd>
 				</dl>
 			</div>
 		</div>
@@ -66,17 +64,17 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
 	<script>
 		var services = [{
-			version: "TMB API v1 (OTP v.0.11)",
+			version: "TMB API v1 (OTP v.0.18)",
 			baseUrl: "http://api.tmb.cat/v1/planner/"
 		},{
-			version: "TMB API v2 (OTP v.0.18)",
+			version: "TMB API v2 (OTP v.1.0.0)",
 			baseUrl: "http://api.tmb.cat/v2/planner/"
 		}]
 
 		$.ajax({
 			url: "resources.json"
 		}).then(
-		parseResources
+			parseResources
 		);
 
 		function parseResources(resources) {
@@ -88,32 +86,32 @@
 				</div>';
 				$('#resources').append(html);
 				$('#resources-menu').append('<li><a href="#header'+e+'">'+resource.name+'</a></li>');
-				for(var r=0; r<resource.requests.length; r++) {
-					var request = resource.requests[r];
+				for(var r=0; r<=1; r++) {
+					var request = JSON.parse(JSON.stringify(resource.request)); // Cloning
 					request.url =  services[r].baseUrl + request.url;
 					var html = '<div class="col-sm-6"> \
-					<h3>'+services[r].version+'</h3> \
-					<h4>Request</h4> \
-					<pre id="request-'+e+'-'+r+'">'+ JSON.stringify(request, null, 3) +'</pre> \
-					<h4>Response</h4> \
-					<pre id="response-'+e+'-'+r+'"></pre> \
-				</div>';
-				$('#resource-'+e).append(html);
-				hljs.highlightBlock(document.getElementById('request-'+e+'-'+r));
-				request.context = { e: e, r: r };
-				$.ajax(request).then(function(response) {
-					var el = $('#response-'+this.e+'-'+this.r);
-					el.append(JSON.stringify(response, null, 3));
-					hljs.highlightBlock(el.get(0));
-				}, function(error) {
-					var el = $('#response-'+this.e+'-'+this.r);
-					el.append(JSON.stringify(error, null, 3));
-					el.addClass("hljs");
-					el.css("color", "red");
-				});
+						<h3>'+services[r].version+'</h3> \
+						<h4>Request</h4> \
+						<pre id="request-'+e+'-'+r+'">'+ JSON.stringify(request, null, 3) +'</pre> \
+						<h4>Response</h4> \
+						<pre id="response-'+e+'-'+r+'"></pre> \
+					</div>';
+					$('#resource-'+e).append(html);
+					hljs.highlightBlock(document.getElementById('request-'+e+'-'+r));
+					request.context = { e: e, r: r };
+					$.ajax(request).then(function(response) {
+						var el = $('#response-'+this.e+'-'+this.r);
+						el.append(JSON.stringify(response, null, 3));
+						hljs.highlightBlock(el.get(0));
+					}, function(error) {
+						var el = $('#response-'+this.e+'-'+this.r);
+						el.append(JSON.stringify(error, null, 3));
+						el.addClass("hljs");
+						el.css("color", "red");
+					});
+				}
 			}
 		}
-	}
 </script>
 </body>
 </html>
