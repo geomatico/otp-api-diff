@@ -1,7 +1,10 @@
 [{
-	"name": "Càlcul de rutes",
+	"name": "Càlcul de rutes (planner)",
 	"request": {
-		"url": "plan",
+		"url": {
+			"0.19": "plan",
+			"1.0.0": "plan"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765",
@@ -15,27 +18,36 @@
 		} 
 	}
 },{
-	"name": "Modes de transport / metadades",
+	"name": "Metadades (modes de transport, bbox)",
 	"request": {
-		"url": "",
+		"url": {
+			"0.19": "",
+			"1.0.0": ""
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"
 		} 
 	}
 },{
-	"name": "Llistat d'operadors",
+	"name": "Llistat d'operadors (d'un feed per a 1.0.0)",
 	"request": {
-		"url": "index/agencies",
+		"url": {
+			"0.19": "index/agencies",
+			"1.0.0": "index/agencies/6"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"
 		} 
 	}
 },{
-	"name": "Llistat de línies",
+	"name": "Llistat de línies (d'una agència per a OTP 0.19)",
 	"request": {
-		"url": "index/agencies/TMB/routes",
+		"url": {
+			"0.19": "index/agencies/TMB/routes",
+			"1.0.0": "index/routes"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"
@@ -44,7 +56,10 @@
 },{
 	"name": "Detall d'una línia",
 	"request": {
-		"url": "index/routes/TMB:2.23",
+		"url": {
+			"0.19": "index/routes/TMB:2.23",
+			"1.0.0": "index/routes/6:2.23"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"
@@ -53,7 +68,10 @@
 },{
 	"name": "Detall d'una parada",
 	"request": {
-		"url": "index/stops/TMB:2.2775",
+		"url": {
+			"0.19": "index/stops/TMB:2.2775",
+			"1.0.0": "index/stops/6:2.2775"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"
@@ -62,7 +80,10 @@
 },{
 	"name": "Propers serveis que passaran per una parada",
 	"request": {
-		"url": "index/stops/TMB:2.2775/stoptimes/20161005",
+		"url": {
+			"0.19": "index/stops/TMB:2.2775/stoptimes/20161005",
+			"1.0.0": "index/stops/6:2.2775/stoptimes/20161005"
+		},
 		"data": {
 			"app_key": "cb2fc6155198c620d9d6f454d4a6ef69",
 			"app_id": "b53a5765"

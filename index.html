@@ -35,26 +35,14 @@
 	<div class="container-fluid">
 		<h2>Adreces i documentació de les APIs</h2>
 		<div class="row">
-			<div class="col-sm-6">
-				<h3>TMB API v1 (OTP v.0.19)</h3>
-				<dl class="dl-horizontal">
-					<dt>Base URL</dt>
-					<dd><a href="http://api.tmb.cat/v1/planner/?app_key=cb2fc6155198c620d9d6f454d4a6ef69&amp;app_id=b53a5765" target="_blank">http://api.tmb.cat/v1/planner/</a></dd>
-					<dt>0.18 (!) Plan Params</dt>
-					<dd><a href="OTP-0.18-PlannerQueryParams.html" target="_blank">Manually Extracted</a></dd>
-				</dl>
-			</div>
-			<div class="col-sm-6">
-				<h3>TMB API v2 (OTP v.1.0.0)</h3>
-				<dl class="dl-horizontal">
-					<dt>Base URL</dt>
-					<dd><a href="http://api.tmb.cat/v2/planner/?app_key=cb2fc6155198c620d9d6f454d4a6ef69&amp;app_id=b53a5765" target="_blank">http://api.tmb.cat/v2/planner/</a></dd>
-					<dt>1.0.0 Plan Params</dt>
-					<dd><a href="http://dev.opentripplanner.org/apidoc/1.0.0/resource_PlannerResource.html" target="_blank">Official API Docs</a></dd>
-					<dt>Full 1.0.0 API Docs</dt>
-					<dd><a href="http://dev.opentripplanner.org/apidoc/1.0.0/" target="_blank">Official API Docs</a></dd>
-				</dl>
-			</div>
+			<ul>
+				<li><a href="OTP-0.18-PlannerQueryParams.html" target="_blank">OTP v.0.18 Planner Params</a></li>
+				<li><a href="http://dev.opentripplanner.org/apidoc/1.0.0/resource_PlannerResource.html" target="_blank">OTP v.1.0.0 Planner Params</a></li>
+				<li><a href="http://dev.opentripplanner.org/apidoc/1.0.0/" target="_blank">Full 1.0.0 API Docs</a></li>
+			</ul>
+		</div>
+		<h2>API endpoints</h2>
+		<div class="row" id="endpoints">
 		</div>
 	</div>
 	<div id="resources" class="container-fluid">
@@ -64,12 +52,27 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
 	<script>
 		var services = [{
-			version: "TMB API v1 (OTP v.0.18)",
-			baseUrl: "http://api.tmb.cat/v1/planner/"
+			label: "TMB API v1",
+			baseUrl: "http://api.tmb.cat/v1/planner/",
+			version: "0.19"
 		},{
-			version: "TMB API v2 (OTP v.1.0.0)",
-			baseUrl: "http://api.tmb.cat/v2/planner/"
-		}]
+			label: "TMB API v2",
+			baseUrl: "http://api.tmb.cat/v2/planner/",
+			version: "0.19"
+		},{
+			label: "TMB API dev",
+			baseUrl: "http://api.tmb.cat/dev/planner/",
+			version: "1.0.0"
+		},{
+			label: "OTP local instance",
+			baseUrl: "http://localhost:8088/otp/routers/default/",
+			version: "1.0.0"
+		}];
+
+		var app = {
+			key: "cb2fc6155198c620d9d6f454d4a6ef69",
+			id: "b53a5765"
+		}
 
 		$.ajax({
 			url: "resources.json"
@@ -78,7 +81,15 @@
 		);
 
 		function parseResources(resources) {
+			var cols = Math.floor(12 / services.length);
 			var menu = "";
+			for(var r=0; r<services.length; r++) {
+				$('#endpoints').append('<div class="col-sm-'+cols+'"> \
+					<h3>'+services[r].label+'</h3> \
+					<p><a href="'+services[r].baseUrl+'?app_key='+app.key+'&amp;app_id='+app.id+'" target="_blank">'+services[r].baseUrl+'</a></p> \
+				</div>');
+			}
+			var header = "";
 			for(var e=0; e<resources.length; e++) {
 				var resource = resources[e];
 				var html = '<h2 id="header'+e+'">'+resource.name+'</h2> \
@@ -86,11 +97,11 @@
 				</div>';
 				$('#resources').append(html);
 				$('#resources-menu').append('<li><a href="#header'+e+'">'+resource.name+'</a></li>');
-				for(var r=0; r<=1; r++) {
+				for(var r=0; r<services.length; r++) {
 					var request = JSON.parse(JSON.stringify(resource.request)); // Cloning
-					request.url =  services[r].baseUrl + request.url;
-					var html = '<div class="col-sm-6"> \
-						<h3>'+services[r].version+'</h3> \
+					request.url =  services[r].baseUrl + request.url[services[r].version];
+					var html = '<div class="col-sm-'+cols+'"> \
+						<h3>'+services[r].label+'</h3> \
 						<h4>Request</h4> \
 						<pre id="request-'+e+'-'+r+'">'+ JSON.stringify(request, null, 3) +'</pre> \
 						<h4>Response</h4> \
